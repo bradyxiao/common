@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tencent.qcloud.sampilenotepad.AdvertiseActivity">
+
+    <TextView
+        android:paddingTop="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:text=""
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:layout_below="@+id/title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="45dp"
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close_black_24dp"
+        android:background="@color/translate"/> <!--设置背景透明，注意是背景-->
+
+    <ImageView
+        android:layout_below="@+id/close"
+        android:layout_marginTop="10dp"
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/p034"/>
+
+</RelativeLayout>

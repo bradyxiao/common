@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SampileNotepad</string>
+    <string name="title_name">笔记</string>
+    <string name="home_name">首页</string>
+    <string name="list_name">列表</string>
+    <string name="me_name">我</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_advertise">AdvertiseActivity</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tencent.qcloud.sampilenotepad.EditActivity">
+
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+
+    </LinearLayout>
+
+    <!-- 文档标题 -->
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_title_light_blue_300_24dp"/>
+        <EditText
+            android:inputType="text"
+            android:id="@+id/content_title_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="请输入标题"
+            android:paddingStart="2dp"
+            android:paddingEnd="0dp"
+            android:textSize="18sp"
+            android:maxLength="20"
+            android:background="@null"/>
+    </LinearLayout>
+    <!--文档描述-->
+    <TextView
+        android:id="@+id/desc_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text=""/>
+    <!--文档编辑内容-->
+    <EditText
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content_edit_id"
+        android:hint="想记录....."
+        android:typeface="normal"
+        android:gravity="top"
+        android:minLines="3"
+        android:background="@drawable/ic_center_focus_weak_red_500_24dp"/>
+
+</LinearLayout>
