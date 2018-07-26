@@ -1,1 +1,3 @@
 include ':app', ':javatrain', ':sampilenotepad'
+include ":commonUtils"
+project(':commonUtils').projectDir = new File(rootDir, '../QTools/commonutils')

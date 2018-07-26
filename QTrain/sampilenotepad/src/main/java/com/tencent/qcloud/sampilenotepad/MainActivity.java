@@ -1,5 +1,6 @@
 package com.tencent.qcloud.sampilenotepad;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,15 +20,20 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tencent.qcloud.commonutils.log.LogUtils;
 import com.tencent.qcloud.sampilenotepad.fragment.HomeFragment;
+import com.tencent.qcloud.sampilenotepad.fragment.ItemListFragment;
 import com.tencent.qcloud.sampilenotepad.fragment.MeFragment;
+import com.tencent.qcloud.sampilenotepad.fragment.dummy.DummyContent;
+import com.tencent.qcloud.sampilenotepad.module.NoteItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, MeFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemListFragment.OnSelectItemListener{
 
     private LinearLayout homeTab, listTab, meTab;
     private ImageButton homeImg, listImg, meImg;
@@ -67,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initViewPager(){
         fragmentList = new ArrayList<>();
         fragmentList.add( new HomeFragment());
+        fragmentList.add(new ItemListFragment());
         fragmentList.add( new MeFragment());
         FragmentManager fragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(fragmentManager, fragmentList);
@@ -157,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+
+
     }
 
     /**
@@ -172,8 +181,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onSelectItem(NoteItem noteItem) {
+        LogUtils.d("XIAO", noteItem.toString());
+        Intent intent = new Intent(this, ReaderActivity.class);
+        intent.putExtra(Common.FILE_PATH_EXTRA, noteItem.getKey());
+        startActivity(intent);
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter{

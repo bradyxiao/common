@@ -5,7 +5,7 @@
     android:orientation="vertical"
     tools:context="com.tencent.qcloud.sampilenotepad.fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragmdate_picker_dialogyout -->
     <GridLayout
         android:paddingTop="10dp"
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QTrain.iml" filepath="$PROJECT_DIR$/QTrain.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../QTools/commonutils/commonUtils.iml" filepath="$PROJECT_DIR$/../QTools/commonutils/commonUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/javatrain/javatrain.iml" filepath="$PROJECT_DIR$/javatrain/javatrain.iml" />
       <module fileurl="file://$PROJECT_DIR$/sampilenotepad/sampilenotepad.iml" filepath="$PROJECT_DIR$/sampilenotepad/sampilenotepad.iml" />
     </modules>

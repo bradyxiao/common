@@ -2,6 +2,7 @@ package com.tencent.qcloud.qtrain;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         linearLayout = findViewById(R.id.layoutId);
         registerForContextMenu(linearLayout);
+
     }
 
     @Override
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case 3:
                 bundle.putInt("ACTION", 3);
-                intentToHomeActivity(bundle);
+                intentToListActivity();
                 return true;
             case 4:
                testSharePreferences();
@@ -77,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra("BUNDLE", bundle);
         startActivityForResult(intent, 100);
+    }
+
+    public void intentToListActivity(){
+        Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
     }
 
     @Override

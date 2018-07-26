@@ -1,13 +1,86 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tea_blue"
     tools:context="com.tencent.qcloud.sampilenotepad.fragment.MeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragmdate_picker_dialogyout -->
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/image_me"
+        android:src="@drawable/ic_add_a_photo_red_50_48dp"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_toRightOf="@+id/image_me"
+        android:layout_alignTop="@+id/image_me"
+        android:layout_alignBottom="@+id/image_me"
+        android:id="@+id/text_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/text_me"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/text_system"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/ic_system_update_purple_900_24dp"
+        android:drawablePadding="10dp"
+        android:text="系统"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/white"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="1dp"
+        android:layout_below="@+id/text_system"
+        android:id="@+id/text_line1"
+        android:background="@color/red_500"/>
+    <TextView
+        android:layout_below="@+id/text_line1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/text_abort"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/ic_bookmark_border_purple_900_24dp"
+        android:drawablePadding="10dp"
+        android:text="关于"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/text_abort"
+        android:id="@+id/text_line2"
+        android:background="@color/red_500"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_below="@+id/text_line2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/text_setting"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/ic_settings_purple_900_24dp"
+        android:drawablePadding="10dp"
+        android:text="设置"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/white"/>
+
+</RelativeLayout>

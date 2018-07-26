@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
+        android:text="文件名: "
+        android:textColor="@color/colorAccent"
+        android:id="@+id/fileNameTag"/>
+    <EditText
+        android:layout_toRightOf="@+id/fileNameTag"
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fileName"
+        android:background="@null"/>
+    <TextView
+        android:layout_below="@+id/fileName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
+        android:text="文件地址: "
+        android:textColor="@color/colorAccent"
+        android:id="@+id/filePathTag"/>
+    <TextView
+        android:layout_toRightOf="@+id/filePathTag"
+        android:layout_below="@+id/fileName"
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:id="@+id/filePath" />
+
+</RelativeLayout>
