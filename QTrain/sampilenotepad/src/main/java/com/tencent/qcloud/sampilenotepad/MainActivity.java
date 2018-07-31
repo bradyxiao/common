@@ -19,8 +19,10 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.qcloud.commonutils.log.LogUtils;
+import com.tencent.qcloud.sampilenotepad.fragment.Home2Fragment;
 import com.tencent.qcloud.sampilenotepad.fragment.HomeFragment;
 import com.tencent.qcloud.sampilenotepad.fragment.ItemListFragment;
 import com.tencent.qcloud.sampilenotepad.fragment.MeFragment;
@@ -28,7 +30,9 @@ import com.tencent.qcloud.sampilenotepad.fragment.dummy.DummyContent;
 import com.tencent.qcloud.sampilenotepad.module.NoteItem;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initViewPager(){
         fragmentList = new ArrayList<>();
-        fragmentList.add( new HomeFragment());
+        fragmentList.add( new Home2Fragment());
         fragmentList.add(new ItemListFragment());
         fragmentList.add( new MeFragment());
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -121,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         viewPager.setCurrentItem(0);
+
+        Set<String> sets = new HashSet<>();
+        sets.add("host");
     }
 
     private void detectAdvertisement(){
@@ -188,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter{
+    private static class ViewPagerAdapter extends FragmentPagerAdapter{
         List<Fragment> fragmentList;
         public ViewPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);

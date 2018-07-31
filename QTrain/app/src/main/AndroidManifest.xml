@@ -24,7 +24,8 @@
         <activity
             android:name=".webview_js.HomeActivity"
             android:theme="@style/myStyle" />
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity" />
+        <activity android:name=".SuspendActivity"></activity>
     </application>
 
 </manifest>

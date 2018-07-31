@@ -5,17 +5,27 @@ import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.tencent.qcloud.commonutils.log.LogUtils;
 import com.tencent.qcloud.qtrain.webview_js.HomeActivity;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+
+import bolts.Continuation;
+import bolts.Task;
+
 public class MainActivity extends AppCompatActivity {
-    LinearLayout linearLayout;
+    ViewGroup linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +33,30 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.layoutId);
         registerForContextMenu(linearLayout);
 
+        if(savedInstanceState != null){
+            Log.d("XIAO", savedInstanceState.getString("XIAO", "NONE"));
+        }else {
+            Log.d("XIAO", "savedInstanceState is null");
+        }
+
+        Log.d("XIAO", "run" + System.getProperty("java.runtime.name"));
+
+         Task<String> result = Task.call(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                //Thread.sleep(6000);
+                LogUtils.d("XIAO", "call");
+                return "yes";
+            }
+        }, Task.BACKGROUND_EXECUTOR);
+         result.onSuccess(new Continuation<String, Object>() {
+             @Override
+             public Object then(Task<String> task) throws Exception {
+                 Log.d("XIAO", task.getResult());
+                 LogUtils.d("XIAO", "then");
+                 return null;
+             }
+         }, Task.UI_THREAD_EXECUTOR);
     }
 
     @Override
@@ -60,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case 2:
                 bundle.putInt("ACTION", 2);
-                intentToHomeActivity(bundle);
+                intentToSuspendActivity();
                 return true;
             case 3:
                 bundle.putInt("ACTION", 3);
@@ -83,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void intentToListActivity(){
         Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
+    public void intentToSuspendActivity(){
+        Intent intent = new Intent(this, SuspendActivity.class);
         startActivity(intent);
     }
 
@@ -128,8 +167,11 @@ public class MainActivity extends AppCompatActivity {
                 }).start();
             }
         }).start();
+    }
 
-
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("XIAO", "onSaveInstanceState " + System.currentTimeMillis());
     }
 }
