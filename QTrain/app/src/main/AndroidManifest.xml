@@ -3,6 +3,7 @@
     package="com.tencent.qcloud.qtrain">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -25,7 +26,11 @@
             android:name=".webview_js.HomeActivity"
             android:theme="@style/myStyle" />
         <activity android:name=".ListActivity" />
-        <activity android:name=".SuspendActivity"></activity>
+        <activity android:name=".SuspendActivity" />
+
+        <service
+            android:name=".server.LoaderIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

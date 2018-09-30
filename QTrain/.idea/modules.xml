@@ -3,10 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QTrain.iml" filepath="$PROJECT_DIR$/QTrain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VideoEffectSDK/VideoEffectSDK.iml" filepath="$PROJECT_DIR$/VideoEffectSDK/VideoEffectSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../QTools/commonutils/commonUtils.iml" filepath="$PROJECT_DIR$/../QTools/commonutils/commonUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/javatrain/javatrain.iml" filepath="$PROJECT_DIR$/javatrain/javatrain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/myapplication/myapplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/sampilenotepad/sampilenotepad.iml" filepath="$PROJECT_DIR$/sampilenotepad/sampilenotepad.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servicedemo/servicedemo.iml" filepath="$PROJECT_DIR$/servicedemo/servicedemo.iml" />
     </modules>
   </component>
 </project>

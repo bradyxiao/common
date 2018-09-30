@@ -1,8 +1,29 @@
 package com.tencent.qcloud.qtrain;
 
+import android.Manifest;
+import android.animation.AnimatorInflater;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.ContactsContract;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.Constraints;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -15,9 +36,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.tencent.av.video.effect.QavVideoEffect;
 import com.tencent.qcloud.commonutils.log.LogUtils;
+import com.tencent.qcloud.myapplication.MyService;
+import com.tencent.qcloud.qtrain.Bluetooth.BluetoothUtil;
 import com.tencent.qcloud.qtrain.webview_js.HomeActivity;
 
+import java.lang.annotation.Target;
+import java.net.InetAddress;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
@@ -25,13 +51,15 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class MainActivity extends AppCompatActivity {
-    ViewGroup linearLayout;
+    LinearLayout linearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         linearLayout = findViewById(R.id.layoutId);
-        registerForContextMenu(linearLayout);
+        linearLayout.addView(new MyAnimatorView(this));
+        grantPermission();
+     //   registerForContextMenu(linearLayout);
 
         if(savedInstanceState != null){
             Log.d("XIAO", savedInstanceState.getString("XIAO", "NONE"));
@@ -57,6 +85,27 @@ public class MainActivity extends AppCompatActivity {
                  return null;
              }
          }, Task.UI_THREAD_EXECUTOR);
+
+//         Intent intent = new Intent(Intent.ACTION_PICK);
+//         intent.setData(ContactsContract.Contacts.CONTENT_URI);
+//         startActivityForResult(intent, 200);
+
+//        ComponentName componentName = new ComponentName("com.tencent.qcloud.myapplication", "com.tencent.qcloud.myapplication.MyService");
+//        Intent intent1 = new Intent();
+//        intent1.setComponent(componentName);
+//        startService(intent1);
+
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+    }
+
+    private void  grantPermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE}, 600);
+        }
     }
 
     @Override
@@ -66,6 +115,17 @@ public class MainActivity extends AppCompatActivity {
             if(requestCode == 100){
                 Toast.makeText(this, data.getBundleExtra("BUNDLE").getString("RESULT"),
                         Toast.LENGTH_SHORT).show();
+            }else if(requestCode == 200){
+                Uri uri = data.getData();
+                String field[] = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
+                Cursor cursor = getContentResolver().query(uri, field, null, null, null);
+                if(cursor != null && cursor.moveToFirst()){
+                    LogUtils.d("XIAO", "phone =" + cursor.getString(0));
+                    cursor.close();
+                }
+            }else if(requestCode == 500){
+                LogUtils.d("XIAO", "blueth");
+
             }
         }
     }
@@ -101,9 +161,10 @@ public class MainActivity extends AppCompatActivity {
                 intentToListActivity();
                 return true;
             case 4:
-               testSharePreferences();
-                write();
-                read();
+//               testSharePreferences();
+//                write();
+//                read();
+                testBluteth();
                 return true;
         }
         return super.onContextItemSelected(item);
@@ -173,5 +234,62 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("XIAO", "onSaveInstanceState " + System.currentTimeMillis());
+    }
+    BluetoothUtil bluetoothUtil;
+    public void testBluteth(){
+        bluetoothUtil = new BluetoothUtil();
+        bluetoothUtil.openBlue(this);
+        bluetoothUtil.printInfo();
+    }
+
+    public void testNotification(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            Intent intent = new Intent(this, SuspendActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 300, intent,
+                    0);
+            Notification notification = new NotificationCompat.Builder(this, "channelId_01")
+                    .setTicker("请注意 notification")
+                    .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                    .setContentTitle("内容标题")
+                    .setContentText("内容")
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .build();
+
+            notificationManager.notify(100, notification);
+            LogUtils.d("XIAO", "(<VERSION_CODES.O) notification");
+        }else {
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            Intent intent = new Intent(this, SuspendActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 300, intent,
+                    0);
+            NotificationChannel notificationChannel = new NotificationChannel("channelId_01",
+                    "channelName_01", NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(notificationChannel);
+            Notification notification = new NotificationCompat.Builder(this, "channelId_01")
+                    .setTicker("请注意 notification")
+                    .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                    .setContentTitle("内容标题")
+                    .setContentText("内容")
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .build();
+
+            notificationManager.notify(100, notification);
+            LogUtils.d("XIAO", "(>=VERSION_CODES.O) notification");
+        }
+
+    }
+
+    private class MyAnimatorView extends View{
+
+        public MyAnimatorView(Context context) {
+            super(context);
+            ObjectAnimator animator = (ObjectAnimator) AnimatorInflater.loadAnimator(context, R.animator.test_anim);
+            animator.setEvaluator(new ArgbEvaluator());
+            animator.setTarget(this);
+            animator.start();
+        }
     }
 }

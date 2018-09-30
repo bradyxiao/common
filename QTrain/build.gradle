@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -19,9 +20,22 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven{
+            url "https://dl.bintray.com/tencentqcloudterminal/maven/"
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+ext{
+    test_name = "ext test name"
+}
+
+//task printProperties(){
+//    println user
+//    Properties properties = new Properties()
+//    properties.load(new FileInputStream("./gradle.properties"))
+//    println properties.getProperty("systemProp.https.proxyHost")
+//}

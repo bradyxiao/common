@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.tencent.qcloud.qtrain.MainActivity;
 import com.tencent.qcloud.qtrain.R;
 import com.tencent.qcloud.qtrain.httpdns.HttpDNSManager;
 
@@ -87,10 +83,10 @@ public class HomeActivity extends Activity {
     }
 
     public void exit(Bundle bundle){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("BUNDLE", bundle);
-        setResult(RESULT_OK, intent);
-        finish();
+//        Intent intent = new Intent(this, HuaWeiActivity.class);
+//        intent.putExtra("BUNDLE", bundle);
+//        setResult(RESULT_OK, intent);
+//        finish();
     }
 
     @Override
